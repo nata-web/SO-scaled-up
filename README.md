@@ -11,14 +11,19 @@ The code is provided in two forms:
 
 ## Content:
 
-* **SO_scaled_up_J.ipynb** - jupyter notebook (Julia), used for setting all the parameters and running the simulation
-* **SO_scaled_up_P.ipynb** - same as SO_scaled_up_J.ipynb, but for Python
+### Jupyter notebooks (without FORTRAN)
+* **SO_scaled_up_P.ipynb** - Python notebook. All included.
+* **SO_scaled_up_J.ipynb** - Julia notebook. Main file used for setting all the parameters and running the simulation (imports par_init.jl and func.jl)
+
+### Code with FORTRAN
 * **SO_scaled_up.jl** - Same as SO_scaled_up_J.ipynb, but with additional option to call for a Fortran routine.
 * **SO_scaled_up.py** - Same as SO_scaled_up.jl, but for Python
+
+### Other
 * **timingF.jl** - Benchmark the functions with and without learning (with FORTRAN)
+* **func.jl** - all the functions (used by Julia files)
 * **par_init.jl** - initiazation (used by Julia files)
 * **par_init_timing.jl** - initiazation (used by timingF.jl)
-* **func.jl** - all the functions (used by Julia files)
 * **SO_logPlot.jl** - loglog plots of the execution times.
 * **times/** - Contains the execution times presented in the paper
 
@@ -27,11 +32,11 @@ Make sure your system has gfortran and f2py for Python or just gfortran for Juli
 
 **For Python:**
 
-f2py3 --f90flags="-fdefault-integer-8 -O3" -m SO_fortF -c SO_fort.F90 
+f2py3 --f90flags="-fdefault-integer-8 -O3" -m soFortranF -c SO_fort.F90 
 
 Or alternative optimized for AMD CPUs:
 
-f2py3 --f90flags="-fdefault-integer-8 -O3 -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer" -m SO_fortF -c SO_fort.F90 
+f2py3 --f90flags="-fdefault-integer-8 -O3 -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer" -m soFortranF -c SO_fort.F90 
 
 **For Julia:**
 
