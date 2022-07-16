@@ -58,7 +58,7 @@ end
 function Binary_energy(N::Int64, step::Int64, reset::Int64, learning::Bool, idx::Int64, oldState::Int8, var::Variables, k::Int64)
     """ Energy computation for a state"""
     if step == 1
-        """ Eq. (2) in Watson et al. Complexity 16,5,2011, factor 0.5"""
+        """ Eq. (2) """
         E = - 0.5 * (transpose(var.state) * var.w_or * var.state)[1]
         if learning
             var.E_L_history[step, reset] = E
@@ -70,7 +70,7 @@ function Binary_energy(N::Int64, step::Int64, reset::Int64, learning::Bool, idx:
             end
         end
     else
-        """ Compute the energy from energy change from previous update """
+        """ Eq. (8) """
         dE = (oldState - var.state[idx]) *
             (dot(var.state, var.w_or[:,idx]) - var.state[idx]*var.w_or[idx,idx])
         if learning
@@ -87,13 +87,14 @@ end
 
 ########################################################################
 function learn(N::Int64, steps::Int64, reset::Int64, prt::Param, var::Variables, learning::Bool, num::Int64)
-    """Run the dynamics with or without learning (Eq.3 ibid), the "regular" way using Binary_update()"""
+    """Run the dynamics with or without learning (Eq.3), the direct routine """
     Generate_state(N, var)  # Randomize initial discrete behaviours/states s_i={+-1}
     dw = zeros(Int8, N,N)
 
     for step in 1:steps
         idx, oldState = Binary_update(N, var)
         if learning
+            """Implementation C in the Appendix"""
             if step == 1
                 dw =  var.state * transpose(var.state)
             else
@@ -133,7 +134,7 @@ function updateW(t::Int64, idx::Int64, idx2t::Vector{Int64}, t2idx::Vector{Int64
 end
 
 function learnSpeed(N::Int64, steps::Int64, reset::Int64, prt::Param, var::Variables, learning::Bool, num::Int64)
-
+    """Run the dynamics with or without learning (Algorithm 2), the on-the-fly routine """
     Generate_state(N, var)           # Randomize initial discrete behaviours/states s_i={+-1}
     w = var.w                        # pointer for shorter notation
     w_or = var.w_or                  # pointer
