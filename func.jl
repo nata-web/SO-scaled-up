@@ -127,7 +127,6 @@ function updateW(t::Int64, idx::Int64, idx2t::Vector{Int64}, t2idx::Vector{Int64
     state = var.state                   # pointer
 
     w[:,idx] .+= dw[:,idx] .* (t-idx2t[idx])
-    # new_dw = state[idx] .* t2state[idx2t[idx]+1:t-1]
     for i = idx2t[idx]+1:t-1
         new_dw = state[idx] * t2state[i]
         w[t2idx[i],idx] += (new_dw - dw[t2idx[i],idx]) * (t - i)
@@ -158,7 +157,7 @@ function learnSpeed(N::Int64, steps::Int64, reset::Int64, prt::Param, var::Varia
             t2idx[t] = idx # what idx that was
         end
 
-        state[idx] = θ.(dot(w[idx,:], state))
+        state[idx] = θ.(dot(w[:,idx], state))
 
         if learning
             t2state[t] = state[idx] # save the state that was changed at time t
@@ -198,7 +197,7 @@ function learnJulia(N::Int64, steps::Int64, prt::Param, var::Variables, speed::B
 
     # # We update the upper triangle in learn(), so we need to copy it
     # # to lower triangle to make it symmetric again
-    # if !speed
+    # if !speed && learning
     #     for i in 1:N
     #         var.w[i+1:N,i] = var.w[i,i+1:N]
     #     end
