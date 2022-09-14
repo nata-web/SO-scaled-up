@@ -27,6 +27,9 @@ The code is provided in two forms:
 * **SO_logPlot.jl** - loglog plots of the execution times.
 * **times/** - Contains the execution times presented in the paper
 
+## Test the code
+To see that the code produces the same result, run the code for the same simulation seed when speed=off in Julia (speed=0 in Python) and then again when speed=true (speed=1).
+
 ## To run the code with FORTRAN:
 Make sure your system has gfortran and f2py for Python or just gfortran for Julia. Run the following commands before the execution of the python / julia code to compile the FORTRAN file:
 
