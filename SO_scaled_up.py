@@ -24,7 +24,8 @@ speed = 1       # speed up by not explicitly adding w=w+dw
 p = 0.1         # modelar w: intermodule connections set to {-p,p} with equal probability
 randomSeed = 1
 seed_w = 12345
-seed_sim = np.random.randint(90000)
+# seed_sim = np.random.randint(90000)
+seed_sim = 4869
 
 sparse_weights = False # True for sparse w, False for modular w
 
@@ -125,10 +126,12 @@ def learn(w, wOrig, steps, N, energies, doLearn):
                 * (np.dot(state,wOrig[:,idx]) - state[idx]*wOrig[idx,idx])
 
 def updateW(w, dw, state, idx, idx2t, t2idx, t2state, t):
-    newState = state[idx] * t2state[idx2t[idx]+1:t]
-    indices = t2idx[idx2t[idx]+1:t]
-    w[idx,indices] += (newState-dw[idx,indices]) * (t-np.arange(idx2t[idx]+1,t))
-    dw[idx,indices] = newState
+    
+    w[idx,:] += dw[idx,:] * (t-idx2t[idx])
+    for i in range(idx2t[idx]+1,t):
+        new_dw = state[idx] * t2state[i]
+        w[idx,t2idx[i]] += (new_dw - dw[idx,t2idx[i]]) * (t-i)
+        dw[idx,t2idx[i]] = new_dw
   
 def learnSpeed(w, wOrig, steps, N, energies, doLearn):
     """Run the dynamics with or without learning (Eq.3 ibid) with 'On the fly' calculation of w """
@@ -326,7 +329,7 @@ if __name__ == '__main__':
     resets = 1000 
     N = 100
     steps = 10*N
-    alphas = [5e-7]
+    alphas = [6e-7]
     
     if sparse_weights:
         ds = [0.1]
@@ -338,7 +341,7 @@ if __name__ == '__main__':
             
             # for eta in [int(1/alpha) for alpha in alphas]:
             for alpha,eta in zip(alphas,[int(1/alpha) for alpha in alphas]):
-                print("""\nStart simulation for sparse W\nN={}, d={}, a={}:\n""".format(N, d, alpha))
+                print("""\nStart simulation for sparse W\nN={}, d={}, a={}, speed={}:\n""".format(N, d, alpha, speed))
                 simulate()
                 energies, w, wOrig = load_data(N,eta)
                 plot_6(energies, w, wOrig)
@@ -352,7 +355,7 @@ if __name__ == '__main__':
                 os.makedirs(path)
             
             for alpha,eta in zip(alphas,[int(1/alpha) for alpha in alphas]):
-                print("""\nStart simulation for modular W\nN={}, k={}, a={}:\n""".format(N, k, alpha))
+                print("""\nStart simulation for modular W\nN={}, k={}, a={}, speed={}:\n""".format(N, k, alpha,speed))
                 simulate()
                 energies, w, wOrig = load_data(N,eta)
                 plot_6(energies, w, wOrig)
