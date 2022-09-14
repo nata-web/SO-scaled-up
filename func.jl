@@ -126,11 +126,13 @@ function updateW(t::Int64, idx::Int64, idx2t::Vector{Int64}, t2idx::Vector{Int64
     w = var.w                           # pointer for shorter notation
     state = var.state                   # pointer
 
-    w[idx,:] .+= dw[idx,:] .* (t-idx2t[idx])
-    newState = state[idx] .* t2state[idx2t[idx]+1:t-1]
-    indices = t2idx[idx2t[idx]+1:t-1]
-    w[idx,indices] += (newState - dw[idx,indices]) .* (t .- (idx2t[idx]+1:t-1))
-    dw[idx,indices] = newState
+    w[:,idx] .+= dw[:,idx] .* (t-idx2t[idx])
+    # new_dw = state[idx] .* t2state[idx2t[idx]+1:t-1]
+    for i = idx2t[idx]+1:t-1
+        new_dw = state[idx] * t2state[i]
+        w[t2idx[i],idx] += (new_dw - dw[t2idx[i],idx]) * (t - i)
+        dw[t2idx[i],idx] = new_dw
+    end
 end
 
 function learnSpeed(N::Int64, steps::Int64, reset::Int64, prt::Param, var::Variables, learning::Bool, num::Int64)
@@ -243,6 +245,7 @@ function simulate(N::Int64, eta::Int64, steps::Int64, prt::Param, var::Variables
             end
         end
     else
+        Random.seed!(var.sim_seed) # set seed for simulation
         learnJulia(N, steps, prt, var, speed, learning, num)
     end
 
