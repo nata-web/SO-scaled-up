@@ -28,7 +28,9 @@ The code is provided in two forms:
 * **times/** - Contains the execution times presented in the paper
 
 ## Test the code
-To see that the code produces the same result, run the code for the same simulation seed when speed=off in Julia (speed=0 in Python) and then again when speed=true (speed=1).
+* Julia and Python jupyter notebooks are mostly intended for visualization purposes of the self-optimization model. To run the code for large networks (N>400) it is recommended to use the "SO_scaled_up" files (in Julia or Python) with the FORTRAN routine enabled. 
+* To see that the code produces the same result with and without the 'on-the-fly' computation of weights, run the code for the same simulation seed when speed=off in Julia (speed=0 in Python) and then again when speed=true (speed=1).
+
 
 ## To run the code with FORTRAN:
 Make sure your system has gfortran and f2py for Python or just gfortran for Julia. Run the following commands before the execution of the python / julia code to compile the FORTRAN file:
@@ -49,5 +51,6 @@ Or:
 
 gfortran SO_fort.F90 -o SO_fortF.so -shared -fPIC -fdefault-integer-8 -O3 -g -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer
 
+## 
 
 If you have any questions, feel free to open an issue or send me an email: natalya.weber (at) oist.jp.
