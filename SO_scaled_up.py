@@ -2,7 +2,7 @@
 """
 Created on Thu Nov 11 21:10:14 2021
 
-@author: Tesh
+@author: Natalya Weber
 """
 
 import os
