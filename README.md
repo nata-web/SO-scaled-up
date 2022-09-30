@@ -1,13 +1,11 @@
 # Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights
 
-This repository contains the code used for the paper [Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights](http://url)(link TBA).
-
-The code is provided in two forms:
+This repository contains the code used for the paper [Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights](http://url)(link TBA). The code is provided in two forms:
 
 * Jupyter Notebooks using the Julia and Python languages. 
 * Julia and Python code with a call to Fortran routine.
 
-
+Julia and Python jupyter notebooks are mostly intended for visualization purposes of the self-optimization model with and without the 'on-the-fly' computation of weights for small networks. To run the code for large networks (N>400) it is recommended to use the "SO_scaled_up" files (in Julia or Python) with the FORTRAN routine enabled. 
 
 ## Content:
 
@@ -28,8 +26,7 @@ The code is provided in two forms:
 * **times/** - Contains the execution times presented in the paper
 
 ## Test the code
-* Julia and Python jupyter notebooks are mostly intended for visualization purposes of the self-optimization model. To run the code for large networks (N>400) it is recommended to use the "SO_scaled_up" files (in Julia or Python) with the FORTRAN routine enabled. 
-* To see that the code produces the same result with and without the 'on-the-fly' computation of weights, run the code for the same simulation seed when speed=off in Julia (speed=0 in Python) and then again when speed=true (speed=1).
+To see that the code produces the same result with and without the 'on-the-fly' computation of weights, run the code for the same simulation seed when speed=off in Julia (speed=0 in Python) and then again when speed=true (speed=1).
 
 
 ## To run the code with FORTRAN:
