@@ -1,6 +1,6 @@
 # Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights
 
-This repository contains the code used for the paper [Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights](http://url)(link TBA). The code is provided in two forms:
+This repository contains the code used for the paper [Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights](https://arxiv.org/abs/2211.01698). The code is provided in two forms:
 
 * Jupyter Notebooks using the Julia and Python languages. 
 * Julia and Python code with a call to Fortran routine.
