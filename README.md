@@ -34,19 +34,19 @@ Make sure your system has gfortran and f2py for Python or just gfortran for Juli
 
 **For Python:**
 
-f2py3 --f90flags="-fdefault-integer-8 -O3" -m soFortranF -c SO_fort.F90 
+`f2py3 --f90flags="-fdefault-integer-8 -O3" -m soFortranF -c SO_fort.F90`
 
 Or alternative optimized for AMD CPUs:
 
-f2py3 --f90flags="-fdefault-integer-8 -O3 -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer" -m soFortranF -c SO_fort.F90 
+`f2py3 --f90flags="-fdefault-integer-8 -O3 -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer" -m soFortranF -c SO_fort.F90`
 
 **For Julia:**
 
-gfortran SO_fort.F90 -o SOfortF.so -shared -fPIC -fdefault-integer-8 -O3 -g
+`gfortran SO_fort.F90 -o SOfortF.so -shared -fPIC -fdefault-integer-8 -O3 -g`
 
 Or:
 
-gfortran SO_fort.F90 -o SO_fortF.so -shared -fPIC -fdefault-integer-8 -O3 -g -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer
+`gfortran SO_fort.F90 -o SO_fortF.so -shared -fPIC -fdefault-integer-8 -O3 -g -march=znver1 -mtune=znver1 -mfma -mavx2 -m3dnow -fomit-frame-pointer`
 
 ## 
 
