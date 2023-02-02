@@ -1,6 +1,6 @@
-# Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights
+# Scaling up the self-optimization model by means of on-the-fly computation of weights
 
-This repository contains the code used for the paper [Large-scale networks for the self-optimization model enabled by on-the-fly computation of weights](https://arxiv.org/abs/2211.01698). The code is provided in two forms:
+This repository contains the code used for the paper <b>"Scaling up the self-optimization model by means of on-the-fly computation of weights"</b> ([IEEE](https://ieeexplore.ieee.org/document/10022074), [arXiv](https://arxiv.org/abs/2211.01698)). The code is provided in two forms:
 
 * Jupyter Notebooks using the Julia and Python languages. 
 * Julia and Python code with a call to Fortran routine.
@@ -51,3 +51,17 @@ Or:
 ## 
 
 If you have any questions, feel free to open an issue or send me an email: natalya.weber (at) oist.jp.
+
+If you use our code for your research, consider citing our paper:
+```
+ @inproceedings{Weber_Koch_Froese_2022, 
+ title = {Scaling up the self-optimization model by means of on-the-fly computation of weights}, 
+ DOI = {10.1109/SSCI51031.2022.10022074}, 
+ abstractNote = {The Self-Optimization (SO) model is a useful computational model for investigating self-organization in “soft” Artificial life (ALife) as it has been shown to be general enough to model various complex adaptive systems. So far, existing work has been done on relatively small network sizes, precluding the investigation of novel phenomena that might emerge from the complexity arising from large numbers of nodes interacting in interconnected networks. This work introduces a novel implementation of the SO model that scales as $mathcalO(N^2)$ with respect to the number of nodes N, and demonstrates the applicability of the SO model to networks with system sizes several orders of magnitude higher than previously was investigated. Removing the prohibitive computational cost of the naive $mathcalO(N^3)$ algorithm, our on-the-fly computation paves the way for investigating substantially larger system sizes, allowing for more variety and complexity in future studies.}, 
+ booktitle = {2022 IEEE Symposium Series on Computational Intelligence (SSCI)}, 
+ author = {Weber, Natalya and Koch, Werner and Froese, Tom}, 
+ year = {2022}, 
+ month = {Dec}, 
+ pages = {1276–1282} 
+ }
+```
