@@ -50,7 +50,7 @@ Or:
 
 ## 
 
-If you have any questions, feel free to open an issue or send me an email: natalya.weber (at) oist.jp.
+If you have any questions, feel free to open an issue or send me an email: natalya.weber (at) alumni.oist.jp.
 
 If you use our code for your research, consider citing our paper:
 ```
